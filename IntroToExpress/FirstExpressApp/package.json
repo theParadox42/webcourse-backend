@@ -1,0 +1,18 @@
+{
+  "name": "firstexpressapp",
+  "version": "1.0.0",
+  "description": "First app",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "Express",
+    "Node"
+  ],
+  "author": "Nathaniel Fargo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
