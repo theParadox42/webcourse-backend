@@ -22,6 +22,6 @@ app.post("/addfriend", function(req, res){
     res.redirect("/friends");
 });
 
-app.listen(9000, undefined, function(){
+app.listen(process.env.PORT || 9000, process.env.IP || undefined, function(){
     console.log("Server started");
 });
