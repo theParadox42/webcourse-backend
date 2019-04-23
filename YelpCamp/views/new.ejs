@@ -4,4 +4,12 @@
 	Make a new campground
 </h1>
 
+<form action="/campgrounds" method="POST">
+    <input type="text" name="name" placeholder="Campground Name"/>
+    <input type="text" name="img" placeholder="Image URL Address"/>
+    <button type="submit">Make New Campground</button>
+</form>
+
+<a href="/campgrounds">Cancel</a>
+
 <% include partials/footer %>
