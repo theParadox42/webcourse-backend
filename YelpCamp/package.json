@@ -1,0 +1,21 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "A web app to view and create campground entrees",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo Testing... 123"
+  },
+  "keywords": [
+    "Camping",
+    "Yelpcamp",
+    "Web",
+    "App"
+  ],
+  "author": "Paradox Programming",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
