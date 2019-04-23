@@ -1,11 +1,13 @@
-// Setup
+// DEPENDENTS
 var express = require("express");
 var app = express();
+var bodyParser = require("body-parser");
 
-
-
+// SETUP
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
 
+// ROUTES
 app.get("/", function(req, res){
 	res.render("landing");
 });
@@ -29,8 +31,14 @@ app.get("/campgrounds", function(req, res){
 	res.render("campgrounds", {campgrounds: campgrounds});
 });
 app.post("/campgrounds", function(req, res){
-	
+	console.log("requested campground");
 });
+app.get("/campgrounds/new", function(req, res){
+	res.render("new");
+});
+
+
+// RUN APP
 app.listen(process.env.PORT || 9000, process.env.IP || undefined, function(){
 	console.log("Yelp Camp server has started!");
 });
