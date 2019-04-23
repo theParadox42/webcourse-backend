@@ -28,7 +28,9 @@ app.get("/campgrounds", function(req, res){
 	
 	res.render("campgrounds", {campgrounds: campgrounds});
 });
-
+app.post("/campgrounds", function(req, res){
+	
+});
 app.listen(process.env.PORT || 9000, process.env.IP || undefined, function(){
 	console.log("Yelp Camp server has started!");
 });
