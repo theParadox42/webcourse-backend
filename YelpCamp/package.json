@@ -4,13 +4,14 @@
   "description": "A web app to view and create campground entrees",
   "main": "app.js",
   "scripts": {
-    "test": "echo Testing... 123"
+    "test": "echo Testing... 123",
+    "start": "node app.js"
   },
   "keywords": [
     "Camping",
     "Yelpcamp",
     "Web",
-    "App"
+    "App",
   ],
   "author": "Paradox Programming",
   "license": "MIT",
