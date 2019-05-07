@@ -19,7 +19,7 @@ var george = new Cat({
 })
 
 george.save(function(err, cat){
-    if(err){
+    if (err) {
         console.log("Something went wrong adding a cat")
     } else {
         console.log("Cat added")
