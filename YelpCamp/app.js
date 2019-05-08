@@ -25,37 +25,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Schema
 var campgroundSchema = new mongoose.Schema({
 	name: String,
-	img: String
+	img: String,
+	description: String
 });
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-// DATA
 
-Campground.create({
-	name: "Happy River",
-	img: "https://farm6.staticflickr.com/5181/5641024448_04fefbb64d.jpg"
-}, function(err, campground){
-	if(err){
-		console.log("Error occurred creating campground");
-		console.log(err);
-	} else {
-		console.log("Successfully created new campground");
-		console.log(campground);
-	}
-});
 
-//Campgrounds
-/* var campgrounds = [
-	{
-	name: "First Campground",
-	img: "https://farm8.staticflickr.com/7252/7626464792_3e68c2a6a5.jpg"
-},
-];
-*/
+
 // ROUTES
 app.get("/", function(req, res){
 	res.render("landing");
 });
+// INDEX view campgrounds
 app.get("/campgrounds", function(req, res){
 	Campground.find({}, function(err, allCampgrounds){
 		if(err){
@@ -65,6 +47,11 @@ app.get("/campgrounds", function(req, res){
 		}
 	});
 });
+// ADD add campground
+app.get("/campgrounds/new", function(req, res){
+	res.render("new");
+});
+// CREATE post to DB
 app.post("/campgrounds", function(req, res){
 	var newCampground = req.body;
 	
@@ -80,10 +67,17 @@ app.post("/campgrounds", function(req, res){
 	
 	
 });
-app.get("/campgrounds/new", function(req, res){
-	res.render("new");
+// SHOW show campground
+app.get("/campgrounds/:id", function(req, res) {
+	Campground.findById(req.params.id, function(err, foundCampground){
+		if(err){
+			console.log("Error getting Campground");
+			console.log(err);
+		} else {
+		    res.render("show", {campground: foundCampground});
+		}
+	});
 });
-
 
 // RUN APP
 app.listen(process.env.PORT || 9000, process.env.IP, function(){
