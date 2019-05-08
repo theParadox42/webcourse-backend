@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/cat_app', {
     useNewUrlParser: true
 }).catch(function(e){
-    console.log("Error occured connecting")
+    console.log("Error occured connecting");
 	console.log(e);
 });
 
@@ -21,12 +21,12 @@ Cat.create({
     cuteness: 2,
 }, function(err, cat){
     if(err){
-        console.log(err)
+        console.log(err);
     } else {
         console.log("cat created");
         console.log(cat);
     }
-})
+});
 
 //Add a cat
 // var george = new Cat({
@@ -51,6 +51,6 @@ Cat.find({}, function(err, cats){
         console.log(err);
     } else {
         console.log("Cats");
-        console.log(cats)
+        console.log(cats);
     }
-})
+});

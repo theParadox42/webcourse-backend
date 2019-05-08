@@ -32,8 +32,8 @@ var Campground = mongoose.model("Campground", campgroundSchema);
 // DATA
 
 Campground.create({
-	name: "Granite Hill",
-	img: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"
+	name: "Happy River",
+	img: "https://farm6.staticflickr.com/5181/5641024448_04fefbb64d.jpg"
 }, function(err, campground){
 	if(err){
 		console.log("Error occurred creating campground");
@@ -45,32 +45,39 @@ Campground.create({
 });
 
 //Campgrounds
-var campgrounds = [
+/* var campgrounds = [
 	{
 	name: "First Campground",
 	img: "https://farm8.staticflickr.com/7252/7626464792_3e68c2a6a5.jpg"
-}
-	,
-	{
-		name: "Happy River",
-		img: "https://farm6.staticflickr.com/5181/5641024448_04fefbb64d.jpg"
-	},
+},
 ];
-
+*/
 // ROUTES
 app.get("/", function(req, res){
 	res.render("landing");
 });
 app.get("/campgrounds", function(req, res){
-	
-	res.render("campgrounds", {campgrounds: campgrounds});
+	Campground.find({}, function(err, allCampgrounds){
+		if(err){
+			console.log(err);
+		} else {
+            res.render("campgrounds", {campgrounds: allCampgrounds});
+		}
+	});
 });
 app.post("/campgrounds", function(req, res){
 	var newCampground = req.body;
 	
-	campgrounds.push(newCampground);
+    Campground.create(newCampground, function(err, newCamp){
+		if(err){
+			console.log("error making campground");
+			console.log(err);
+			res.redirect("/campgrounds/new");
+		} else {
+	        res.redirect("/campgrounds");
+		}
+	});
 	
-	res.redirect("/campgrounds");
 	
 });
 app.get("/campgrounds/new", function(req, res){
