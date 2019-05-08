@@ -1,0 +1,17 @@
+{
+  "name": "cat-app",
+  "version": "1.0.0",
+  "description": "A cat mongodb database",
+  "main": "cats.js",
+  "scripts": {
+    "test": "echo \"wow\""
+  },
+  "keywords": [
+    "Cats"
+  ],
+  "author": "Paradox Programming",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.5.6"
+  }
+}
