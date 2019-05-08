@@ -1,23 +1,20 @@
 {
   "name": "yelpcamp",
   "version": "1.0.0",
-  "description": "A web app to view and create campground entrees",
+  "description": "Campground hub to post and edit campgrounds",
   "main": "app.js",
   "scripts": {
-    "test": "echo Testing... 123",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Camping",
-    "Yelpcamp",
-    "Web",
-    "App",
+    "Camping"
   ],
   "author": "Paradox Programming",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.5.6"
   }
 }
