@@ -13,9 +13,9 @@ var Cat = mongoose.model("Cat", catSchema);
 //Add a cat
 
 var george = new Cat({
-    name: "George",
-    age: 50,
-    cuteness: 0.1,
+    name: "Nutmeg",
+    age: 2,
+    cuteness: 3,
 })
 
 george.save(function(err, cat){
