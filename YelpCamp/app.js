@@ -54,7 +54,7 @@ app.get("/campgrounds/new", function(req, res){
 // CREATE post to DB
 app.post("/campgrounds", function(req, res){
 	var newCampground = req.body;
-	
+	console.log(newCampground)
     Campground.create(newCampground, function(err, newCamp){
 		if(err){
 			console.log("error making campground");
