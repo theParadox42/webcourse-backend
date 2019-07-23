@@ -1,7 +1,7 @@
 
 // Mongoose
 var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {
+mongoose.connect('mongodb+srv://public:123@associations-mddjv.mongodb.net/data?retryWrites=true&w=majority', {
     useNewUrlParser: true
 }).catch(function(e){
     console.log("Error occured connecting to mongodb");
@@ -19,6 +19,30 @@ var User = mongoose.model("User", userSchema);
 //POST
 var postSchema = new mongoose.Schema({
     title: String,
-    content: String,
+    content: String
 });
-var postModel = new mongoose.model("post", postSchema)
+var Post = mongoose.model("Post", postSchema);
+
+var newPost = new Post({
+    title: "Apples",
+    content: "Yummy"
+})
+newPost.save(function(err, post){
+    if(err){
+        console.log("Error", err);
+    } else {
+        console.log("New Post!", post)
+    }
+});
+
+// var newUser = new User({
+//     email: "fred@me.com",
+//     name: "Fred McGuffin"
+// })
+// newUser.save(function(err, user){
+//     if(err){
+//         console.log("Error Occured", err);
+//     } else {
+//         console.log("New user added!", user)
+//     }
+// });

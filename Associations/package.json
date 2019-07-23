@@ -1,0 +1,17 @@
+{
+  "name": "associations",
+  "version": "1.0.0",
+  "description": "Data associations",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Data"
+  ],
+  "author": "theParadox42",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.6.6"
+  }
+}
