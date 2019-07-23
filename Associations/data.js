@@ -24,23 +24,35 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model("User", userSchema);
 
-
-
-var newUser = new User({
-    email: "george.muffin@gmail.com",
-    name: "George Muffin"
-})
-newUser.posts.push({
-    title: "I made a Muffin!",
-    content: "Look at it. Wait... I ate it!"
-})
-newUser.save(function(err, user){
+User.findOne({name: "George Muffin"}, function(err, user){
     if(err){
-        console.log("Error Occured", err);
+        console.log("Error finding George Muffin", err);
     } else {
-        console.log("New user added!", user)
+        user.posts.push({
+            title: "3 things I hate",
+            content: "Apples, Bananas, Cats"
+        })
+        user.save(function(err, user){
+            console.log(err?err:user);
+        })
     }
-});
+})
+
+// var newUser = new User({
+//     email: "george.muffin@gmail.com",
+//     name: "George Muffin"
+// })
+// newUser.posts.push({
+//     title: "I made a Muffin!",
+//     content: "Look at it. Wait... I ate it!"
+// })
+// newUser.save(function(err, user){
+//     if(err){
+//         console.log("Error Occured", err);
+//     } else {
+//         console.log("New user added!", user)
+//     }
+// });
 
 
 // New stuff
