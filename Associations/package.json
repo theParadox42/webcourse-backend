@@ -12,6 +12,7 @@
   "author": "theParadox42",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "mongoose": "^5.6.6"
   }
 }

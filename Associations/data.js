@@ -1,7 +1,7 @@
 
 // Mongoose
 var mongoose = require("mongoose");
-mongoose.connect('mongodb+srv://public:123@associations-mddjv.mongodb.net/data?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://public:'+process.env.webdevbootcamppassword+'@data-sodyq.mongodb.net/dataassociations?retryWrites=true&w=majority', {
     useNewUrlParser: true
 }).catch(function(e){
     console.log("Error occured connecting to mongodb");
