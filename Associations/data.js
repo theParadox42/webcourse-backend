@@ -8,14 +8,6 @@ mongoose.connect('mongodb+srv://public:123@associations-mddjv.mongodb.net/data?r
 	console.log(e);
 });
 
-// user
-var userSchema = new mongoose.Schema({
-    email: String,
-    name: String
-});
-
-var User = mongoose.model("User", userSchema);
-
 //POST
 var postSchema = new mongoose.Schema({
     title: String,
@@ -23,26 +15,44 @@ var postSchema = new mongoose.Schema({
 });
 var Post = mongoose.model("Post", postSchema);
 
-var newPost = new Post({
-    title: "Apples",
-    content: "Yummy"
+// user
+var userSchema = new mongoose.Schema({
+    email: String,
+    name: String,
+    posts: [postSchema]
+});
+
+var User = mongoose.model("User", userSchema);
+
+
+
+var newUser = new User({
+    email: "george.muffin@gmail.com",
+    name: "George Muffin"
 })
-newPost.save(function(err, post){
+newUser.posts.push({
+    title: "I made a Muffin!",
+    content: "Look at it. Wait... I ate it!"
+})
+newUser.save(function(err, user){
     if(err){
-        console.log("Error", err);
+        console.log("Error Occured", err);
     } else {
-        console.log("New Post!", post)
+        console.log("New user added!", user)
     }
 });
 
-// var newUser = new User({
-//     email: "fred@me.com",
-//     name: "Fred McGuffin"
+
+// New stuff
+
+// var newPost = new Post({
+//     title: "Apples",
+//     content: "Yummy"
 // })
-// newUser.save(function(err, user){
+// newPost.save(function(err, post){
 //     if(err){
-//         console.log("Error Occured", err);
+//         console.log("Error", err);
 //     } else {
-//         console.log("New user added!", user)
+//         console.log("New Post!", post)
 //     }
 // });
