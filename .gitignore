@@ -1,3 +1,4 @@
 .manifest
 goorm.manifest
 node_modules
+.DS_Store
