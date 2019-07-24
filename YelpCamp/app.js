@@ -1,3 +1,4 @@
+// Process stuff
 if(process.env.HEROKU != "yes"){
 	require('dotenv').config();
 }
