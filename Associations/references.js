@@ -17,7 +17,7 @@ var postSchema = new mongoose.Schema({
     title: String,
     content: String
 });
-var Post = mongoose.model("Post", postSchema);
+var Post = mongoose.model("post", postSchema);
 
 // user
 var userSchema = new mongoose.Schema({
@@ -31,19 +31,21 @@ var userSchema = new mongoose.Schema({
     ]
 });
 
-var User = mongoose.model("User", userSchema);
+var User = mongoose.model("user", userSchema);
 
-var bob = new User({
-    name: "Bob the Builder",
-    email: "bob@bob.com"
-})
-bob.save(function(err, user){
-    console.log(err?err:user);
+User.findOne({email:"bob@bob.com"}).populate("posts").exec(function(err, user){
+    if(err){
+        console.log(err);
+    } else {
+        console.log("User data");
+        console.log(user);
+    }
 });
 
+
 // Post.create({
-//     title: "I had another day",
-//     content: "Now I am mostly sleeping"
+//     title: "Sleeping",
+//     content: "ZZZZZZZZZZZ"
 // }, function(err, post){
 //     if(err){
 //         console.log("Error making post");
@@ -60,3 +62,14 @@ bob.save(function(err, user){
 //         })
 //     }
 // });
+
+
+/* Bob
+var bob = new User({
+    name: "Bob the Builder",
+    email: "bob@bob.com"
+})
+bob.save(function(err, user){
+    console.log(err?err:user);
+});
+*/
