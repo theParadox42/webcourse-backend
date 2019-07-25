@@ -1,12 +1,12 @@
-var _                       = require('dotenv').config();
+var _                       = require('dotenv').config(),
     express                 = require('express'),
     app                     = express(),
     expressSession          = require('express-session'),
     mongoose                = require('mongoose'),
     bodyParser              = require('body-parser'),
     User                    = require('./models/user'),
-    passport                = require('passport');
-    localStategy            = require('passport-local'),
+    passport                = require('passport'),
+    localStrategy           = require('passport-local'),
     passportLocalMongoose   = require('passport-local-mongoose');
 
 // mongoose
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -34,6 +35,8 @@ passport.deserializeUser(User.deserializeUser());
 app.get("/", function(req, res){
     res.render("home");
 })
+
+// SIGNING UP
 // Register page
 app.get("/register", function(req, res){
     res.render("register")
@@ -51,8 +54,30 @@ app.post("/register", function(req, res){
         })
     })
 })
+// LOGGING IN
+app.get("/login", function(req, res){
+    res.render("login");
+})
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/login"
+}), function(req, res){
+
+});
+// LOGGING OUT
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+})
+
 // Secret page
-app.get("/secret", function(req, res){
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/");
+}
+app.get("/secret", isLoggedIn, function(req, res){
     res.render("secret")
 })
 
