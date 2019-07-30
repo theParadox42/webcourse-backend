@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 class="text-center"><%= profile.username %>'s Profile!</h1>
+    <hr>
+    <h3><%= profile.username %>'s Campgrounds</h3>
+    <ul>
+        <% profile.campgrounds.forEach(function(campground){ %>
+        <li>
+            <strong>
+                <%= campground.name %>
+            </strong>
+            <ul>
+                <li>$<%= campground.price %> per night</li>
+                <li><%= campground.description %></li>
+            </ul>
+        </li>
+        <% }); %>
+    </ul>
+    <hr>
+    <h3><%= profile.username %> Comments</h3>
+    <ul>
+        <% profile.comments.forEach(function(comment){ %>
+        <li>
+            <strong>
+                <%= comment.name %>
+                <ul>
+                    <li><%= comment.campground %></li>
+                </ul>
+            </strong>
+        </li>
+        <% }); %>
+    </ul>
+</div>
+
+<% include ../partials/footer %>
