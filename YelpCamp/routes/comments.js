@@ -1,6 +1,7 @@
 
 var express     = require("express"),
     router      = express.Router({ mergeParams: true }),
+    User        = require("../models/user"),
     Comment     = require("../models/comment"),
     Campground  = require("../models/campground"),
     middleware  = require("../middleware");
@@ -46,7 +47,7 @@ router.post("/", middleware.loggedInOnly, function(req, res){
                                 res.flash("error", "User not found. Shouldn't happen");
                                 res.redirect("back");
                             } else {
-                                user.comments.push(comment);
+                                user.comments.push(comment._id);
                                 user.save();
                             }
                         });
