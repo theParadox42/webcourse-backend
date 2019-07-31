@@ -92,7 +92,13 @@ router.delete("/user/delete", middleware.loggedInOnly, function(req, res){
                     req.flash("error", "Error deleting user");
                     res.redirect("/profile");
                 } else {
-                    console.log(req.get("host"));
+                    if(foundUser){
+                        
+                    }
+                    var author = {
+                        id: req.user.id,
+                        username: req.user.username
+                    }
                     for(var i = 0; i < foundUser.comments.length; i ++){
                         var comment = foundUser.comments[i];
                         http.request(req.protocol + "://" + req.get("host") + "/campgrounds/" + comment.campground.id + "/comments/" + comment._id, { method: "DELETE" });
