@@ -107,7 +107,7 @@ router.delete("/:id", middleware.ownsCampgroundOnly, function(req, res){
                     res.redirect("/campgrounds/" + req.params.id);
                 } else {
                     User.findById(foundCampground.author.id, function(err, foundUser){
-                        if(!err){
+                        if(!err && foundUser){
                             var campgroundIndex = foundUser.campgrounds.findIndex(function(c){
                                 return c.equals(foundCampground._id);
                             })
@@ -117,7 +117,7 @@ router.delete("/:id", middleware.ownsCampgroundOnly, function(req, res){
                             req.flash("error", "No user associated with campground");
                         }
                         for(var i = 0; i < foundCampground.comments.length; i ++){
-                            http.delete("/campgrounds/" + foundCampground._id + "/comments/" + foundCampground.comments[i]);
+                            http.request(req.protocol + "://" + req.get("host") + "/campgrounds/" + foundCampground._id + "/comments/" + foundCampground.comments[i]);
                         }
                         res.redirect("/campgrounds");
                     });

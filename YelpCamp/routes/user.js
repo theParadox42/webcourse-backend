@@ -1,9 +1,10 @@
 
 var express     = require("express"),
     router      = express.Router(),
+    passport    = require("passport"),
+    http        = require("http"),
     Campground  = require("../models/campground"),
     User        = require("../models/user"),
-    passport    = require("passport"),
     middleware  = require("../middleware");
 
 // AUTH ROUTES
@@ -91,9 +92,14 @@ router.delete("/user/delete", middleware.loggedInOnly, function(req, res){
                     req.flash("error", "Error deleting user");
                     res.redirect("/profile");
                 } else {
+                    console.log(req.get("host"));
                     for(var i = 0; i < foundUser.comments.length; i ++){
                         var comment = foundUser.comments[i];
-                        http.delete("/campgrounds/" + comment.campground.id + "/comments/" + comment._id);
+                        http.request(req.protocol + "://" + req.get("host") + "/campgrounds/" + comment.campground.id + "/comments/" + comment._id, { method: "DELETE" });
+                    }
+                    for(var i = 0; i < foundUser.campgrounds.length; i ++){
+                        var campground = foundUser.campgrounds[i];
+                        http.request(req.protocol + "://" + req.get("host") + "/campgrounds/" + campground._id, { method: "DELETE" });
                     }
                     res.redirect("/logout");
                 }

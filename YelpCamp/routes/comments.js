@@ -1,4 +1,3 @@
-
 var express     = require("express"),
     router      = express.Router({ mergeParams: true }),
     User        = require("../models/user"),
@@ -99,7 +98,7 @@ router.delete("/:commentid", middleware.ownsCommentOnly, function(req, res){
                     res.redirect("back");
                 } else {
                     User.findById(foundComment.author.id, function(err, foundUser){
-                        if(err){
+                        if(err || !foundUser){
                             req.flash("error", "No User associated with comment");
                         } else {
                             var commentIndex = foundUser.comments.findIndex(function(c){
