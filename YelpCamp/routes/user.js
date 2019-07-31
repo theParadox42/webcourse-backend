@@ -3,9 +3,11 @@ var express     = require("express"),
     router      = express.Router(),
     Campground  = require("../models/campground"),
     User        = require("../models/user"),
-    passport    = require("passport");
+    passport    = require("passport"),
+    middleware  = require("../middleware");
 
 // AUTH ROUTES
+// Redirect to your account
 router.get("/profile", function(req, res){
     if(req.user){
         res.redirect("/profile/" + req.user.username);
@@ -72,6 +74,32 @@ router.get("/logout", function(req, res){
 	req.logout();
     req.flash("success", "Logged you out!");
 	res.redirect("/campgrounds");
+})
+// DELETE a user
+router.get("/user/delete", middleware.loggedInOnly, function(req, res){
+    res.render("users/delete");
+})
+// DESTROY a user
+router.delete("/user/delete", middleware.loggedInOnly, function(req, res){
+    User.findById(req.user._id).populate("campgrounds comments").exec(function(err, foundUser){
+        if(err){
+            req.flash("error", "Error finding user to delete");
+            res.redirect("/profile");
+        } else {
+            User.deleteOne({ _id: req.user._id }, function(err){
+                if(err){
+                    req.flash("error", "Error deleting user");
+                    res.redirect("/profile");
+                } else {
+                    for(var i = 0; i < foundUser.comments.length; i ++){
+                        var comment = foundUser.comments[i];
+                        http.delete("/campgrounds/" + comment.campground.id + "/comments/" + comment._id);
+                    }
+                    res.redirect("/logout");
+                }
+            })
+        }
+    })
 })
 
 module.exports = router;

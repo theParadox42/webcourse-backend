@@ -1,7 +1,7 @@
 
 var express     = require("express"),
     router      = express.Router({ mergeParams: true }),
-    request     = require("express"),
+    http        = require("http"),
     Campground  = require("../models/campground"),
     User        = require("../models/user"),
     middleware  = require("../middleware");
@@ -113,12 +113,14 @@ router.delete("/:id", middleware.ownsCampgroundOnly, function(req, res){
                             })
                             foundUser.campgrounds.splice(campgroundIndex, 1);
                             foundUser.save();
+                        } else {
+                            req.flash("error", "No user associated with campground");
                         }
+                        for(var i = 0; i < foundCampground.comments.length; i ++){
+                            http.delete("/campgrounds/" + foundCampground._id + "/comments/" + foundCampground.comments[i]);
+                        }
+                        res.redirect("/campgrounds");
                     });
-                    for(var i = 0; i < foundCampground.comments.length; i ++){
-                        request.delete("/campgrounds/" + foundCampground._id + "/comments/" + foundCampground.comments[i]);
-                    }
-                    res.redirect("/campgrounds");
                 }
             });
         }
