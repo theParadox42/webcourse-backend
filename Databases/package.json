@@ -12,6 +12,6 @@
   "author": "Paradox Programming",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.5.6"
+    "mongoose": "^5.7.5"
   }
 }
